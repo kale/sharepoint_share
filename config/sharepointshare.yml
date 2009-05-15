@@ -1,0 +1,25 @@
+app_name: sharepointshare
+app_title: SharePointShare
+default_title: "SharePoint Share : Community Filtered SharePoint News"
+sub_title: "Community-maintained SharePoint News"
+app_url: http://www.sharepointshare.com/
+rss_url: http://feeds2.feedburner.com/sharepointshare
+meta_keywords: ""
+meta_author: "Kale Davis"
+body_class: sharepointshare
+
+# Set this to true for a more fancy interface, but for the cost of page load time
+uses_javascript: false
+
+# Edit expiration default: 60 (this means that editing ends 60 minutes after last update of item)
+# Set to 0 or omit to always allow editing of items by its owner
+edit_expiration_in_minutes: 60
+
+ga: UA-1264213-11
+sidebar: |-
+  <h3>What?</h3><p>SharePoint Share is a community driven SharePoint links site. Items are not added automatically, but chosen and summarized by the community, resulting in a high quality of links.</p>
+  <h3>How?</h3><p>Enjoy the links, comment or <a href="/items/new">make a post</a> of your own. You don't need to be signed in!</p>
+  <p><em>Note: If you're not signed in, your byline is unlinked and your links are made "nofollow" to prevent spam. You also get CAPTCHAed!</em></p>
+  <h3>Who?</h3><p>SharePoint Share is maintained by <a href="http://www.kaledavis.com">Kale Davis</a>. The original RubyFlow was built by <a href="http://peterc.org/">Peter Cooper</a> of <a href="http://www.rubyinside.com/" rel="nofollow">Ruby Inside</a>, but is ultimately a community site.</p>
+  <p><small>This site is based off the codebase provided by <a href="http://www.rubyflow.com">RubyFlow</a>. </small></p>
+  <p><a href="http://feeds2.feedburner.com/sharepointshare" rel="alternate" type="application/rss+xml"><img src="http://www.feedburner.com/fb/images/pub/feed-icon16x16.png" alt="" style="vertical-align:middle;border:0"/></a>&nbsp;<a href="http://feeds2.feedburner.com/sharepointshare" rel="alternate" type="application/rss+xml">Subscribe in a reader</a></p>

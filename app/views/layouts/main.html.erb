@@ -18,7 +18,7 @@
 	<body class="<%= @body_class %> <%= APP_CONFIG[:body_class] %>">
 	
   	<div id="header">
-  		<h1><a href="/" class="home"><%= APP_CONFIG[:app_title] %></a><span>Community Driven JavaScript News</h1>
+  		<h1><a href="/" class="home"><%= APP_CONFIG[:app_title] %></a><span></h1>
   		<div id="stuff">
   		  <%= link_to 'Home', root_url %> | <a href="<%= APP_CONFIG[:rss_url] %>">RSS Feed</a> | 
   		  <%= link_to 'Post Item', new_item_path, :class => 'rubyred' %> |
@@ -45,15 +45,6 @@
 			
 		</div>    
 	<% if APP_CONFIG[:ga] %>
-	<script type="text/javascript">
-  var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-  document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-  </script>
-  <script type="text/javascript">
-  var pageTracker = _gat._getTracker("<%= APP_CONFIG[:ga] %>");
-  pageTracker._initData();
-  pageTracker._trackPageview();
-  </script>             
   <% end %>
 	</body>
 </html>
