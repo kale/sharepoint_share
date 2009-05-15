@@ -32,6 +32,8 @@
     </p>
     
     <p><%= f.text_area :content, :cols => 60, :rows => 8 %></p>
+
+    <p>Tags: <%= f.text_field :tag_list %></p>
     
     <%= render :partial => 'home/signup_captcha' unless logged_in? %>
     

@@ -7,10 +7,10 @@
 	<div class="metadata">
 	  Posted by <%= user_link(item) %> 
 	  at <%= item.created_at.strftime("%R") %> &mdash; 
+    <% if item.tags.count > 0 %> Tags: <% item.tag_list.each do |tag| %><%= link_to tag, tag_url(tag) %> <% end %><% end %> |     
 	  <%= link_to pluralize(item.comments.size, 'comment'), "#{item_path(item)}/#comments", :class => 'comments_link', :title => "Read or write comments" %> | 
 	  <%= link_to pluralize(item.stars.size, 'star'), item_add_star_path(item), :title => 'Star this post', :id => "item_#{item.id}-star-count", :class => 'star' %>
 	  <% if logged_in? %> <%= star_link(item) %> <% end %>
-	  <% if item.tag_array.count != 0 %> Tags: <% item.tag_array.each do |tag| %><%= link_to tag, tag_url(tag) %> <% end %><% end %>
   </div>
   
   <% div_for(item, :class => "admin-actions") do %>
