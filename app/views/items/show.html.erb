@@ -1,16 +1,35 @@
-<%= render :partial => @item %>
+<div class="postpage">
+	<h2 class="title"><%= @item.title %></h2>
+	
+	<div class="metadata">
+	  Posted by <%= user_link(@item) %> at <%= @item.created_at.strftime("%R") %> &mdash; 
+    <% if @item.tags.count > 0 %> Tags: <% @item.tag_list.each do |tag| %><%= image_tag "tag_pink.png" %><%= link_to tag, :action => "search", :id => tag %> <% end %><% end %> |     
+	  <%= link_to pluralize(@item.comments.size, 'comment'), "#{item_path(@item)}/#comments", :class => 'comments_link', :title => "Read or write comments" %> | 
+	  <%= link_to pluralize(@item.stars.size, 'star'), item_add_star_path(@item), :title => 'Star this post', :id => "item_#{@item.id}-star-count", :class => 'star' %>
+	  <% if logged_in? %> <%= star_link(@item) %> <% end %>
+    <% if admin? %> 
+	    <%= link_to 'Remove', @item, :confirm => 'Are you sure?', :method => :delete %>
+	  <% end %>
+    <% time_left = edit_time_left(@item) %>
+	  <% if admin? || (@item.user == current_user && (time_left.nil? || time_left > 0))  %> 
+      <%= link_to 'Edit', edit_item_path(@item), :title => "Last chance of editing ends #{time_left.nil? ? 'never' : ('in ' + time_left.to_s + ' minutes')}." %>
+	  <% end %>
+  	</div>  
+
+	<p><%= auto_link(safe(@item.content)) %></p>
   
-<div id="comments">
-  
-  <% unless @item.stars.blank? %>
-  <h3>Starred by:</h3>
-  <p><%= @item.stars.map { |star|  link_to star.user.login, star.user.url }.to_sentence -%></p>
-  <% end %>
-  
-  <h3><%= pluralize @item.comments.count, 'comment' %></h3>
-  <% @item.comments.each do |comment| %>
-    <blockquote class="comment"><span class="a">&#147;</span><span class="b">&#148;</span><%= safe(comment.content) %><cite><%= comment.user ? %Q{<a href="#{comment.user.url}">#{comment.user.login}</a>} : comment.byline %> - <%= comment.created_at.strftime("%B %d, %Y %R") %></cite></blockquote>
-  <% end %>
-  
-<%= render :partial => 'comments/edit_comment', :locals => {:comment => @comment, :item => @item} %>
+	<div id="comments">
+	  
+	  <% unless @item.stars.blank? %>
+	  <h3>Starred by:</h3>
+	  <p><%= @item.stars.map { |star|  link_to star.user.login, star.user.url }.to_sentence -%></p>
+	  <% end %>
+	  
+	  <h3><%= pluralize @item.comments.count, 'comment' %></h3>
+	  <% @item.comments.each do |comment| %>
+	    <blockquote class="comment"><span class="a">&#147;</span><span class="b">&#148;</span><%= safe(comment.content) %><cite><%= comment.user ? %Q{<a href="#{comment.user.url}">#{comment.user.login}</a>} : comment.byline %> - <%= comment.created_at.strftime("%B %d, %Y %R") %></cite></blockquote>
+	  <% end %>
+	  
+	<%= render :partial => 'comments/edit_comment', :locals => {:comment => @comment, :item => @item} %>
+	</div>
 </div>

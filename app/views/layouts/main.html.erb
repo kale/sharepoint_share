@@ -18,31 +18,35 @@
 	<body class="<%= @body_class %> <%= APP_CONFIG[:body_class] %>">
 	
   	<div id="header">
-  		<h1><a href="/" class="home"><%= APP_CONFIG[:app_title] %></a><span></h1>
-  		<div id="stuff">
-  		  <%= link_to 'Home', root_url %> | <a href="<%= APP_CONFIG[:rss_url] %>">RSS Feed</a> | 
-  		  <%= link_to 'Post Item', new_item_path, :class => 'rubyred' %> |
+  		<h1 class="mir">
+        <a href="/" class="home"><%= APP_CONFIG[:app_title] %></a>
+      </h1>
+  		
+      <div id="menu">
+  		  <%= link_to 'Home', root_url %> | 
+  		  <%= link_to 'Post Item/Link', new_item_path, :class => 'highlight' %> |
+        <a href="<%= APP_CONFIG[:rss_url] %>">RSS Feed</a> |
   		  <% if logged_in? %>
   		    <%= link_to 'Recently', recently_items_url -%> |
   		    <%= link_to 'Log Out', logout_url %>
   		  <% else %>
-  			  <%= link_to 'Sign Up', signup_url %> | <%= link_to 'Log In', login_url %>
+  			  <%= link_to 'Sign Up', signup_url %> | 
+          <%= link_to 'Log In', login_url %>
   			<% end %>
   		</div>
   	</div>
   	
   	<div id="page">
   		<div id="content">
-      <% if flash[:notice] %><p class="message"><%= flash[:notice] %></p><% end %>
-	    <%= yield %>
+        <% if flash[:notice] %>
+          <p class="message"><%= flash[:notice] %></p>
+        <% end %>
+	      <%= yield %>
 		  </div>
 		  
 		  <div id="sidebar">
 				<%= APP_CONFIG[:sidebar] %>
-			</div><!-- sidebar -->
-			
-			<div class="float"></div><div class="floatcontainer"><div class="float"></div></div>
-			
+			</div>
 		</div>    
 	<% if APP_CONFIG[:ga] %>
   <% end %>

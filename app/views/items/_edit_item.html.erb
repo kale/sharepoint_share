@@ -18,8 +18,8 @@
     <% end %>
   
     <p>
+      <label for="title" class="title">Title <span class="hint">(used for archive pages, etc.)</span></label><br />
       <%= f.text_field :title %>
-      <label for="title" class="title">Title <span class="hint">(used for archive pages, etc.)</span></label>
     </p>
   
     <p class="formatting-help">
@@ -33,10 +33,21 @@
     
     <p><%= f.text_area :content, :cols => 60, :rows => 8 %></p>
 
-    <p>Tags: <%= f.text_field :tag_list %></p>
+    <p>
+      <label for="tags" class="tags">Tags <span class="hint">(seperate mutliple tags with a comma)</span></label><br />
+      <%= f.text_field :tag_list %>
+    </p>
     
     <%= render :partial => 'home/signup_captcha' unless logged_in? %>
     
     <p><%= f.submit "#{method == 'post' ? 'Post' : 'Update'} Item" %></p>
 </blockquote>
 <% end %>
+
+<%= observe_form "preview_item",     
+:frequency => 2,
+:update => "live_preview",
+:complete => "Element.show('live_preview')",
+:url =>  { :controller => 'items', :action => 'preview' } %>
+
+<div id="live_preview"><%= text_area :content, :cols => 60, :rows => 8 %></div>

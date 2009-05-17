@@ -128,10 +128,11 @@ class ItemsController < ApplicationController
       format.json { head :ok }
     end
   end
-  
+ 
   def search
     @items_count = Item.count(:conditions => ['title LIKE ? OR tags LIKE ?', "%#{params[:id]}%", "%#{params[:id]}%"])
     @items = Item.find(:all, {:conditions => ['title LIKE ? OR tags LIKE ?', "%#{params[:id]}%", "%#{params[:id]}%"]}.merge(@pagination_options))
+    @items = Item.find_tagged_with(params[:id])
     @noindex = true
 
     respond_to do |format|
@@ -154,6 +155,10 @@ class ItemsController < ApplicationController
     current_user.update_attribute :last_checked_at, Time.now
   end
   
+  def preview
+    render :layout => false
+  end
+
   protected
   
   def permission_required
